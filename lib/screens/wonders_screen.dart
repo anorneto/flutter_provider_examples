@@ -1,3 +1,4 @@
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_examples/providers/wonders_provider.dart';
@@ -20,21 +21,17 @@ class WondersScreen extends StatelessWidget {
         builder: (context, WondersProvider currentWonder, _) {
           return Column(
             children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(width: 10.0),
-                  color: Colors.orange,
-                  borderRadius: BorderRadius.circular(5.0),
+              Expanded(
+                child: FlareActor(
+                  'assets/animations/wonders.flr',
+                  animation: currentWonder.animationName,
+                  fit: BoxFit.fitWidth,
                 ),
-                child: Stack(
-                  alignment: AlignmentDirectional.bottomStart,
-                  children: <Widget>[
-                    Image.asset(currentWonder.path),
-                    Text(
-                      currentWonder.name,
-                      style: textTheme.title,
-                    ),
-                  ],
+              ),
+              Container(
+                child: Text(
+                  currentWonder.name,
+                  style: textTheme.title,
                 ),
               ),
               SizedBox(
